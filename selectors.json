@@ -1,0 +1,58 @@
+{
+    "titleSelector": [
+        {
+            "selector": "h1[class=\"mvp-post-title left entry-title\"]"
+        },
+        {
+            "selector": "div[class=\"titleArticle\"] > h1"
+        },
+        {
+            "selector": "title"
+        }
+    ],
+    "dateSelector": [
+        {
+            "selector": "span[class=\"c-item__time\"]"
+        },
+        {
+            "selector": "meta[property=\"article:published_time\"]"
+        },
+        {
+            "selector": "div[class=\"articleDate\"] > span"
+        },
+        {
+            "selector": "meta[name=\"datePublished\"]"
+        }
+    ],
+    "authorSelector": [
+        {
+            "selector": "span[class=\"author-name vcard fn author\"] > a" 
+        },
+        {
+            "selector": "meta[property=\"article:author\"]"
+        }
+    ],
+    "sectionSelector": [
+        {
+            "selector": "h3[class=\"mvp-post-cat left relative\"] > a > span"
+        },
+        {
+            "selector": "div[class=\"subSection col-sm-9\"]"
+        },
+        {
+            "selector": "meta[property=\"article:section\"]"
+        }
+        
+    ],
+    "contentSelector": [
+        {
+            "selector": "div[id=\"m-content\"]"
+        },
+        {
+            "selector": "div.articleContent"
+        },
+        {
+            "selector": "article"
+        }
+    ]
+}

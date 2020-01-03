@@ -1,0 +1,24 @@
+{
+  "name": "carpers",
+  "version": "1.0.0",
+  "description": "carpers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "carpers"
+  ],
+  "author": "cscervantes",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.3",
+    "cloudscraper": "^4.5.0",
+    "moment": "^2.24.0",
+    "mysql": "^2.17.1",
+    "request": "^2.88.0",
+    "string": "^3.3.3",
+    "strip-comments": "^2.0.1",
+    "strip-html-comments": "^1.0.0"
+  }
+}
