@@ -26,6 +26,9 @@
     ],
     "authorSelector": [
         {
+            "selector": "div[class=\"articleAuthor\"] a" 
+        },
+        {
             "selector": "span[class=\"author-name vcard fn author\"] > a" 
         },
         {

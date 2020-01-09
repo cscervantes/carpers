@@ -1,4 +1,4 @@
-const { rq, strip, cheerio, S, u_parse, cscp } = require('../mods')
+const { strip, cheerio, S, u_parse, cscp } = require('../mods')
 
 class Html {
     constructor(url){
@@ -15,8 +15,7 @@ class Html {
     urlLink(){
         let Url = this.Url()
         return new Promise((resolve, reject)=>{
-            try{
-                
+            try{   
                 resolve(Url)
             }catch(e){
                 reject(e)
@@ -44,7 +43,13 @@ class Html {
                     if(error){
                         reject(error)
                     }else{
-                        let $ = cheerio.load(body, {normalizeWhitespace:true, decodeEntities: false})
+                        let $ = cheerio.load(
+                            body, 
+                            {
+                                normalizeWhitespace:true, 
+                                decodeEntities: false
+                            }
+                        )
                         resolve(S(strip($('html').html())).collapseWhitespace().s)
                     }
                 })  
@@ -85,9 +90,9 @@ class Html {
                     url = S(url).replaceAll('https', 'http').s
                     return url
                 }).filter(function(v){
-                    return v.search(/((\.jpg)|(\.jpeg)|(\.mp4)|(\.mp3)|(\.png)|(\.mpeg)|(\.gif)|(\.bmp)|(\.docx)|(\.doc)|(\.pdf)|(\.js)|(\.css)|(\.jar)|(#)$)|((facebook.com)|(instagram.com)|(twitter.com)|(google.com)|(youtube.com))|(\/rss$)|(\/search?)|(\/subscribe)|(#disqus_thread)|(\/profile$)|(\/member-agreement)|(\/about-us)|(\/contact-us)|(\/privacy-policy)|(\/copyright-notice)|(\/(add_to)\/)/gi) == -1
+                    return v.search(/((\.jpg)|(\.jpeg)|(\.mp4)|(\.mp3)|(\.png)|(\.mpeg)|(\.gif)|(\.bmp)|(\.docx)|(\.doc)|(\.pdf)|(\.js)|(\.css)|(\.jar)|(#)$)|((facebook.com)|(instagram.com)|(twitter.com)|(google.com)|(youtube.com))|(\/rss$)|(\/search\?)|(\?max-results=)|(login\.php)|(\/subscribe)|(#disqus_thread)|(\/profile$)|(\/member-agreement)|(\/about-us)|(\/contact-us)|(\/privacy-policy)|(\/copyright-notice)|(\/(add_to)\/)/gi) == -1
                 })
-                resolve(Array.from(new Set(hrefs)))
+                resolve(Array.from(new Set(hrefs)).sort())
             }catch(e){
                 reject(e)
             }

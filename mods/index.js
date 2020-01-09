@@ -1,6 +1,6 @@
 module.exports = {
     cheerio : require('cheerio'),
-    rq : require('request').defaults({json:true}),
+    rq      : require('request').defaults({json:true}),
     S       : require('string'),
     moment  : require('moment'),
     mysql   : require('mysql'),
