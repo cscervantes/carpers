@@ -8,7 +8,8 @@ class Article {
         this.authorSelector     = params.selectors.authorSelector || null
         this.sectionSelector    = params.selectors.sectionSelector || null
         this.contentSelector    = params.selectors.contentSelector || null
-        this.imageVideoSelector = params.selectors.imageVideoSelector || null
+        this.imageSelector      = params.selectors.imageSelector || null
+        this.videoSelector      = params.selectors.videoSelector || null
     }
 
     Title(){
@@ -22,13 +23,17 @@ class Article {
                     for(let i = 0; i < selector.length; i++){
                         let select = $(selector[i].selector)
                         if(select.length > 0){
-                            // console.log(selector[i].selector, select.text().trim())
-                            title = select.text().trim()
+                            if(selector[i].attrib){
+                                title = select.attr(selector[i].attrib).trim()
+                            }else{
+                                title = select.text().trim()
+                            }
+                            
                             break;
                         }
                     }
                     if(!title){
-                        reject('title No found selector!')
+                        reject('[Title] No found selector!')
                     }
                     resolve(title)
                 }else{
@@ -49,14 +54,18 @@ class Article {
                 if(selector.length > 0){
                     let $ = cheerio.load(html, {normalizeWhitespace:true, decodeEntities: false})
                     for(let i = 0; i < selector.length; i++){
-                        if($(selector[i].selector).length > 0){
-                            // console.log($(selector[i].selector).length, selector[i].selector)
-                            datePublish = $(selector[i].selector).attr('content')
+                        let select = $(selector[i].selector)
+                        if(select.length > 0){
+                            if(selector[i].attrib){
+                                datePublish = select.attr(selector[i].attrib)
+                            }else{
+                                datePublish = select.text().trim()
+                            }
                             break;
                         }
                     }
                     if(!datePublish){
-                        reject('date No found selector!')
+                        reject('[Date] No found selector!')
                     }
                     resolve(datePublish)
                 }else{
@@ -77,15 +86,16 @@ class Article {
                 if(selector.length > 0){
                     let $ = cheerio.load(html, {normalizeWhitespace:true, decodeEntities: false})
                     for(let i = 0; i < selector.length; i++){
-                        if($(selector[i].selector).length > 0){
-                            // console.log($(selector[i].selector).length, selector[i].selector)
-                            author = $(selector[i].selector).text()
+                        let select = $(selector[i].selector)
+                        if(select.length > 0){
+                            if(selector[i].attrib){
+                                author = select.attr(selector[i].attrib)
+                            }else{
+                                author = select.text().trim()
+                            }
                             break;
                         }
                     }
-                    // if(!author){
-                    //     reject('section No found selector!')
-                    // }
                     resolve(author)
                 }else{
                     reject('Author selector is required!')
@@ -105,18 +115,19 @@ class Article {
                 if(selector.length > 0){
                     let $ = cheerio.load(html, {normalizeWhitespace:true, decodeEntities: false})
                     for(let i = 0; i < selector.length; i++){
-                        if($(selector[i].selector).length > 0){
-                            // console.log($(selector[i].selector).length, selector[i].selector)
-                            section = $(selector[i].selector).text()
+                        let select = $(selector[i].selector)
+                        if(select.length > 0){
+                            if(selector[i].attrib){
+                                section = select.attr(selector[i].attrib)
+                            }else{
+                                section = select.text().trim()
+                            }
                             break;
                         }
                     }
-                    // if(!section){
-                    //     reject('section No found selector!')
-                    // }
                     resolve(section)
                 }else{
-                    reject('section selector is required!')
+                    reject('Section selector is required!')
                 }
             }catch(e){
                 reject(e)
@@ -146,11 +157,11 @@ class Article {
                         }
                     }
                     if(!content){
-                        reject('Content No found selector!')
+                        reject('[Content] No found selector!')
                     }
                     resolve(content)
                 }else{
-                    reject('content selector is required!')
+                    reject('Content selector is required!')
                 }
             }catch(e){
                 reject(e)
@@ -159,7 +170,21 @@ class Article {
     }
 
     Images(){
-
+        let html = this.rawHtml
+        let selector = this.imageSelector
+        return new Promise((resolve, reject) => {
+            try{
+                let images = []
+                let $ = cheerio.load(html)
+                console.log(selector)
+                $(selector[0].selector).each(function(i, e){
+                    images[i] = $(e).attr('src')
+                })
+                resolve(images)
+            }catch(e){
+                reject(e)
+            }
+        })
     }
 
     Vidoes(){

@@ -1,61 +1,115 @@
 {
     "titleSelector": [
         {
-            "selector": "h1[class=\"mvp-post-title left entry-title\"]"
+            "selector": "h1[class=\"mvp-post-title left entry-title\"]",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "div[class=\"titleArticle\"] > h1"
+            "selector": "div[class=\"titleArticle\"] > h1",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "title"
+            "selector": "title",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         }
     ],
     "dateSelector": [
         {
-            "selector": "span[class=\"c-item__time\"]"
+            "selector": "span[class=\"c-item__time\"]",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "meta[property=\"article:published_time\"]"
+            "selector": "meta[property=\"article:published_time\"]",
+            "attrib": "content",
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "div[class=\"articleDate\"] > span"
+            "selector": "div[class=\"articleDate\"] > span",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "meta[name=\"datePublished\"]"
+            "selector": "meta[name=\"datePublished\"]",
+            "attrib": "content",
+            "ignoreTags": [],
+            "ignoreText": []
         }
     ],
     "authorSelector": [
         {
-            "selector": "div[class=\"articleAuthor\"] a" 
+            "selector": "div[class=\"articleAuthor\"] a",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "span[class=\"author-name vcard fn author\"] > a" 
+            "selector": "span[class=\"author-name vcard fn author\"] > a",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "meta[property=\"article:author\"]"
+            "selector": "meta[property=\"article:author\"]",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         }
     ],
     "sectionSelector": [
         {
-            "selector": "h3[class=\"mvp-post-cat left relative\"] > a > span"
+            "selector": "h3[class=\"mvp-post-cat left relative\"] > a > span",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "div[class=\"subSection col-sm-9\"]"
+            "selector": "div[class=\"subSection col-sm-9\"]",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "meta[property=\"article:section\"]"
+            "selector": "meta[property=\"article:section\"]",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         }
         
     ],
     "contentSelector": [
         {
-            "selector": "div[id=\"m-content\"]"
+            "selector": "div[id=\"m-content\"]",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "div.articleContent"
+            "selector": "div.articleContent",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
         },
         {
-            "selector": "article"
+            "selector": "article",
+            "attrib": null,
+            "ignoreTags": [],
+            "ignoreText": []
+        }
+    ],
+    "imageSelector": [
+        {
+            "selector": "div[class=\"article-header\"] img",
+            "attrib": "src"
         }
     ]
 }

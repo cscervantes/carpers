@@ -50,9 +50,10 @@ module.exports = (URL, SELECTORS) => {
                 let author = await article.Author()
                 let content = await article.Content()
                 let url = await html.urlLink()
+                let images = await article.Images()
 
                 let jsonBody = {
-                    title, publish, section, author, content, url
+                    url, title, publish, section, author, content, images
                 }
                 resolve(jsonBody)
             }else{
