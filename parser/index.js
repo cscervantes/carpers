@@ -151,7 +151,8 @@ class Article {
                         if($(selector[i].selector).length > 0){
                             // console.log($(selector[i].selector).length, selector[i].selector)
                             content = $(selector[i].selector).html()
-                            content = $(content).text()
+                            content = S(content).replaceAll('<br>', ' ').s
+                            content = S(content).stripTags().s
                             content = S(content).collapseWhitespace().s
                             break;
                         }
@@ -170,16 +171,40 @@ class Article {
     }
 
     Images(){
-        let html = this.rawHtml
+        // let html = this.rawHtml
+        // let selector = this.imageSelector
+        // return new Promise((resolve, reject) => {
+        //     try{
+        //         let images = []
+        //         let $ = cheerio.load(html)
+        //         console.log(selector)
+        //         $(selector[0].selector).each(function(i, e){
+        //             images[i] = $(e).attr('src')
+        //         })
+        //         resolve(images)
+        //     }catch(e){
+        //         reject(e)
+        //     }
+        // })
         let selector = this.imageSelector
+        let html = this.rawHtml
         return new Promise((resolve, reject) => {
             try{
                 let images = []
-                let $ = cheerio.load(html)
-                console.log(selector)
-                $(selector[0].selector).each(function(i, e){
-                    images[i] = $(e).attr('src')
-                })
+                let $ = cheerio.load(html, {normalizeWhitespace:true, decodeEntities: false})
+                for(let i = 0; i < selector.length; i++){
+                    let select = $(selector[i].selector)
+                    
+                    if(select.length > 0){
+                        // console.log(select) 
+                        select.each(function(i, e){
+                            if($(e).attr(selector[i].attrib)){
+                                images[i] = $(e).attr(selector[i].attrib)
+                            } 
+                        })
+                        break;
+                    }
+                }
                 resolve(images)
             }catch(e){
                 reject(e)
