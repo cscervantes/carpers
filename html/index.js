@@ -90,7 +90,7 @@ class Html {
                     url = S(url).replaceAll('https', 'http').s
                     return url
                 }).filter(function(v){
-                    return v.search(/((\.jpg)|(\.jpeg)|(\.mp4)|(\.mp3)|(\.png)|(\.mpeg)|(\.gif)|(\.bmp)|(\.docx)|(\.doc)|(\.pdf)|(\.js)|(\.css)|(\.jar)|(#)$)|((facebook.com)|(instagram.com)|(twitter.com)|(google.com)|(youtube.com))|(\/rss$)|(\/search\?)|(\?max-results=)|(login\.php)|(\/subscribe)|(#disqus_thread)|(\/profile$)|(\/member-agreement)|(\/about-us)|(\/contact-us)|(\/privacy-policy)|(\/copyright-notice)|(\/(add_to)\/)/gi) == -1
+                    return v.search(/((\.jpg)|(\.jpeg)|(\.mp4)|(\.mp3)|(\.png)|(\.mpeg)|(\.gif)|(\.bmp)|(\.docx)|(\.doc)|(\.pdf)|(\.js)|(\.css)|(\.jar)|(#)$)|((facebook.com)|(instagram.com)|(twitter.com)|(google.com)|(youtube.com))|(\/rss$)|(\/search\?)|(\?max-results=)|(login\.php)|(\/subscribe)|(#disqus_thread)|(\/profile$)|(\/member-agreement)|(\/about-us)|(\/contact-us)|(\/privacy-policy)|(\/copyright-notice)|(\/(add_to)\/)|(\/(privacy)$)|(\/(terms)$)/gi) == -1
                 })
                 resolve(Array.from(new Set(hrefs)).sort())
             }catch(e){
