@@ -72,25 +72,37 @@ class Html {
                 .get()
                 .filter((v)=>{
                     return v.length > 0
-                }).map(v=>{
+                })
+                
+                let links1 = links.filter(v=>v.startsWith('http'))
+                let links2 = links.filter(v=>!v.startsWith('http'))
+
+                let links2_result = links2
+                .map(v=>{
                     if(v.startsWith('//')){
                         return `http://${v}`
                     }else if(v.startsWith('/')){
                         return `http://${u_domain}${v}`
+                    }else if(!v.startsWith('http')){
+                        return `http://${u_domain}/${v}`
                     }else{
                         return v
                     }
-                }).filter(v=>{
-                    return v.includes(u_domain)
                 })
 
+                let combined_links = links1.concat(links2_result)
+                links = combined_links
+                .filter(v=>{
+                    return v.includes(u_domain)
+                })
+                
                 links.push(await Url)
                 let hrefs = links.map(v=>{
                     let url = S(v).chompRight('/').s
                     url = S(url).replaceAll('https', 'http').s
                     return url
                 }).filter(function(v){
-                    return v.search(/((\.jpg)|(\.jpeg)|(\.mp4)|(\.mp3)|(\.png)|(\.mpeg)|(\.gif)|(\.bmp)|(\.docx)|(\.doc)|(\.pdf)|(\.js)|(\.css)|(\.jar)|(#)$)|((facebook.com)|(instagram.com)|(twitter.com)|(google.com)|(youtube.com))|(\/rss$)|(\/search\?)|(\?max-results=)|(login\.php)|(\/subscribe)|(#disqus_thread)|(\/profile$)|(\/member-agreement)|(\/about-us)|(\/contact-us)|(\/privacy-policy)|(\/copyright-notice)|(\/(add_to)\/)|(\/(privacy)$)|(\/(terms)$)/gi) == -1
+                    return v.search(/(cdn\-cgi)|((\.jpg)|(\.jpeg)|(\.mp4)|(\.mp3)|(\.png)|(\.mpeg)|(\.gif)|(\.bmp)|(\.docx)|(\.doc)|(\.pdf)|(\.js)|(\.css)|(\.jar)|(#)$)|((facebook.com)|(instagram.com)|(twitter.com)|(google.com)|(youtube.com))|(\/rss$)|(\/search\?)|(\?max-results=)|(login\.php)|(\/subscribe)|(#disqus_thread)|(\/profile$)|(\/member-agreement)|(\/about-us)|(\/contact-us)|(\/privacy-policy)|(\/copyright-notice)|(\/(add_to)\/)|(\/(privacy)$)|(\/(terms)$)|(javascript\:void)/gi) == -1
                 })
                 resolve(Array.from(new Set(hrefs)).sort())
             }catch(e){
