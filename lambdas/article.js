@@ -2,7 +2,7 @@ const Article = require('../parser')
 const { fs } = require('../mods')
 const HTML = require('../html')
 
-console.log('Environment:',process.env.NODE_ENV)
+console.log('Parser Environment:',process.env.NODE_ENV)
 
 // async function scrape(URL){
 //     try{

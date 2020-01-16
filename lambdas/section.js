@@ -4,7 +4,7 @@ Array.prototype.cleanUrl = function(){
     return Array.from(new Set(this.map(v=>v.replace(/^https/g, 'http').replace(/\/$/g, '')).sort()))
 }
 
-module.exports.EXTRACT_URLS = (URL, FILTERS) => {
+module.exports.EXTRACT_URLS = (URL) => {
     return new Promise(async(resolve, reject) => {
         try{
             if(URL){
@@ -32,7 +32,7 @@ module.exports.SECTION_URLS = (params, FILTERS) => {
             if(FILTERS.section_filter.includes.length > 0){
                 urls = urls.filter(function(v){
                     let filters = FILTERS.section_filter.includes.map(function(f){
-                        return `v.search(new RegExp(eval(${f}), 'g')) !== -1`
+                        return `v.search(new RegExp(eval(${f}), 'gi')) !== -1`
                     })
                     return eval(filters.join(' || '))
                 })
@@ -41,7 +41,7 @@ module.exports.SECTION_URLS = (params, FILTERS) => {
             if(FILTERS.section_filter.excludes.length > 0){
                 urls = urls.filter(function(v){
                     let filters = FILTERS.section_filter.excludes.map(function(f){
-                        return `v.search(new RegExp(eval(${f}), 'g')) === -1`
+                        return `v.search(new RegExp(eval(${f}), 'gi')) === -1`
                     })
                     return eval(filters.join(' && '))
                 })
@@ -61,7 +61,7 @@ module.exports.ARTICLE_URLS = (params, FILTERS) => {
             if(FILTERS.article_filter.includes.length > 0){
                 urls = urls.filter(function(v){
                     let filters = FILTERS.article_filter.includes.map(function(f){
-                        return `v.search(new RegExp(eval(${f}), 'g')) !== -1`
+                        return `v.search(new RegExp(eval(${f}), 'gi')) !== -1`
                     })
                     return eval(filters.join(' || '))
                 })
@@ -70,7 +70,7 @@ module.exports.ARTICLE_URLS = (params, FILTERS) => {
             if(FILTERS.article_filter.excludes.length > 0){
                 urls = urls.filter(function(v){
                     let filters = FILTERS.article_filter.excludes.map(function(f){
-                        return `v.search(new RegExp(eval(${f}), 'g')) === -1`
+                        return `v.search(new RegExp(eval(${f}), 'gi')) === -1`
                     })
                     return eval(filters.join(' && '))
                 })
