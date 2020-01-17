@@ -5,12 +5,12 @@ const collect = async (URI) => {
     try{
         let filters = {
             article_filter: {
-                includes: ['/\\/(\\d+)\\/\/'],
+                includes: [],
                 excludes: []
             },
             section_filter: {
-                includes: ['/\\/(search)\\/\/'], 
-                excludes: ['/\\/(\\d){4}\/']
+                includes: [], 
+                excludes: []
             }
             
             // article_filter: {
